@@ -1,0 +1,250 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Prompt Evaluation Report</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                line-height: 1.6;
+                margin: 0;
+                padding: 20px;
+                color: #333;
+            }
+            .header {
+                background-color: #f0f0f0;
+                padding: 20px;
+                border-radius: 5px;
+                margin-bottom: 20px;
+            }
+            .summary-stats {
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            .stat-box {
+                background-color: #fff;
+                border-radius: 5px;
+                padding: 15px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                flex-basis: 30%;
+                min-width: 200px;
+            }
+            .stat-value {
+                font-size: 24px;
+                font-weight: bold;
+                margin-top: 5px;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+            }
+            th {
+                background-color: #4a4a4a;
+                color: white;
+                text-align: left;
+                padding: 12px;
+            }
+            td {
+                padding: 10px;
+                border-bottom: 1px solid #ddd;
+                vertical-align: top;
+            }
+            tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+            .output-cell {
+                white-space: pre-wrap;
+            }
+            .score {
+                font-weight: bold;
+                padding: 5px 10px;
+                border-radius: 3px;
+                display: inline-block;
+            }
+            .score-high {
+                background-color: #c8e6c9;
+                color: #2e7d32;
+            }
+            .score-medium {
+                background-color: #fff9c4;
+                color: #f57f17;
+            }
+            .score-low {
+                background-color: #ffcdd2;
+                color: #c62828;
+            }
+            .output {
+                overflow: auto;
+                white-space: pre-wrap;
+            }
+
+            .output pre {
+                background-color: #f5f5f5;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                padding: 10px;
+                margin: 0;
+                font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+                font-size: 14px;
+                line-height: 1.4;
+                color: #333;
+                box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+                overflow-x: auto;
+                white-space: pre-wrap; 
+                word-wrap: break-word; 
+            }
+
+            td {
+                width: 20%;
+            }
+            .score-col {
+                width: 80px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Prompt Evaluation Report</h1>
+            <div class="summary-stats">
+                <div class="stat-box">
+                    <div>Total Test Cases</div>
+                    <div class="stat-value">4</div>
+                </div>
+                <div class="stat-box">
+                    <div>Average Score</div>
+                    <div class="stat-value">8.2 / 10</div>
+                </div>
+                <div class="stat-box">
+                    <div>Pass Rate (≥7)</div>
+                    <div class="stat-value">100.0%</div>
+                </div>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Scenario</th>
+                    <th>Prompt Inputs</th>
+                    <th>Solution Criteria</th>
+                    <th>Output</th>
+                    <th>Score</th>
+                    <th>Reasoning</th>
+                </tr>
+            </thead>
+            <tbody>
+    
+            <tr>
+                <td>Testing with interdisciplinary passage containing mixed topics from psychology, neuroscience, and technology to verify accurate topic extraction across fields</td>
+                <td class="prompt-inputs"><strong>content:</strong> Recent advances in brain-computer interfaces (BCIs) have demonstrated remarkable potential for treating neurological disorders through the integration of machine learning algorithms and neural signal processing. Researchers utilizing implanted microelectrode arrays have successfully decoded motor intent from primary motor cortex recordings, enabling paralyzed patients to control robotic limbs with high precision. Simultaneously, non-invasive EEG-based systems combined with deep neural networks have shown promise in real-time attention monitoring and cognitive load assessment. These technological developments rely on principles of neuroplasticity—the brain's capacity to reorganize neural pathways—which psychological studies have shown is enhanced through intensive task training and sensorimotor feedback loops. The convergence of neuroscience, computational neuroscience, and biomedical engineering has opened new therapeutic avenues while raising important questions about cognitive enhancement, privacy concerns in neural data collection, and the psychological implications of human-machine neural integration.</td>
+                <td class="criteria">• Extracts all major topics spanning psychology, neuroscience, and technology domains<br>• Returns output as a valid JSON array of strings<br>• Captures both specific technical terms and broader conceptual areas mentioned in the passage</td>
+                <td class="output"><pre>```json
+[
+  "Brain-Computer Interfaces",
+  "Machine Learning in Neural Signal Processing",
+  "Microelectrode Arrays",
+  "Motor Cortex Decoding",
+  "Robotic Limb Control",
+  "EEG-Based Systems",
+  "Deep Neural Networks",
+  "Attention Monitoring",
+  "Cognitive Load Assessment",
+  "Neuroplasticity",
+  "Sensorimotor Feedback",
+  "Computational Neuroscience",
+  "Biomedical Engineering",
+  "Cognitive Enhancement",
+  "Neural Data Privacy",
+  "Human-Machine Neural Integration"
+]
+```</pre></td>
+                <td class="score-col"><span class="score score-high">8</span></td>
+                <td class="reasoning">The solution meets all mandatory requirements: it provides valid JSON with no duplicates, includes specific and relevant topics appropriate to the academic domain, and maintains concise topic descriptions. The extraction is comprehensive, capturing both technical implementation details (microelectrode arrays, EEG-based systems, deep neural networks) and conceptual areas (neuroplasticity, cognitive enhancement, neural data privacy). However, a few significant topics mentioned in the passage were overlooked—particularly 'neurological disorders' which frames the entire motivation in the opening sentence, and the psychological implications explicitly referenced in the conclusion. These omissions represent incomplete coverage of major topics, though the solution still captures the predominant themes effectively.</td>
+            </tr>
+        
+            <tr>
+                <td>Testing with passage containing overlapping or nested concepts where topics could be interpreted at different levels of granularity</td>
+                <td class="prompt-inputs"><strong>content:</strong> The study of neuroplasticity has fundamentally transformed our understanding of brain development and cognitive rehabilitation. Synaptic pruning, the process by which the brain eliminates redundant neural connections, occurs simultaneously with synaptogenesis, or the formation of new synaptic connections. These complementary mechanisms are particularly active during critical developmental periods in childhood and adolescence, though evidence suggests the adult brain maintains considerable capacity for structural reorganization. Furthermore, experience-dependent plasticity—wherein learning and environmental enrichment physically reshape neural architecture through dendritic growth and myelination—demonstrates that cognitive development is not solely determined by genetic programming but is deeply influenced by behavioral engagement and environmental stimulation throughout the lifespan.</td>
+                <td class="criteria">• Extracts topics at appropriate levels of granularity (e.g., 'neuroplasticity' as overarching concept alongside 'synaptic pruning' and 'synaptogenesis' as specific mechanisms)<br>• Captures both general concepts (brain development, cognitive rehabilitation) and specific biological processes (dendritic growth, myelination)<br>• Returned as a valid JSON array of strings</td>
+                <td class="output"><pre>```json
+[
+  "Neuroplasticity",
+  "Brain Development",
+  "Cognitive Rehabilitation",
+  "Synaptic Pruning",
+  "Synaptogenesis",
+  "Critical Developmental Periods",
+  "Adult Brain Plasticity",
+  "Experience-Dependent Plasticity",
+  "Dendritic Growth",
+  "Myelination",
+  "Neural Architecture",
+  "Cognitive Development",
+  "Genetic Programming",
+  "Environmental Stimulation"
+]
+```</pre></td>
+                <td class="score-col"><span class="score score-high">8</span></td>
+                <td class="reasoning">The solution meets all mandatory requirements: it provides valid JSON with string elements, includes all major topics from the passage, uses specific and descriptive language appropriate to neuroscience, contains no duplicates, and maintains concise phrasing (all topics are 2-5 words). The granularity is well-balanced per the secondary criteria, appropriately mixing general concepts with specific biological processes. However, the solution has minor gaps in comprehensiveness. 'Structural Reorganization' is explicitly stated as a key adult brain capacity, and 'lifespan' plasticity is emphasized as a central theme of the passage. Including these would make the extraction more complete. The solution demonstrates strong understanding of topic extraction but leaves room for more thorough coverage of all significant concepts presented.</td>
+            </tr>
+        
+            <tr>
+                <td>Testing with dense academic text containing domain-specific jargon and acronyms to ensure topics are extracted despite terminology complexity</td>
+                <td class="prompt-inputs"><strong>content:</strong> Recent advances in CRISPR-Cas9 gene editing have demonstrated significant efficacy in treating monogenic disorders through non-homologous end joining (NHEJ) pathways and homology-directed repair (HDR) mechanisms. The off-target effects previously associated with sgRNA specificity have been substantially mitigated through the development of high-fidelity Cas9 variants and optimized PAM sequences. Furthermore, multiplexed CRISPR arrays enable simultaneous targeting of polygenic traits, while emerging base editing technologies circumvent the need for double-strand breaks. Clinical trials utilizing ex vivo CAR-T cell engineering with CRISPR-modified TCR genes have shown promising immunotoxicity profiles in acute lymphoblastic leukemia (ALL) and chronic myeloid leukemia (CML) cohorts, though long-term follow-up data regarding genomic stability and genotoxicity remain limited.</td>
+                <td class="criteria">• Extracts all major topics despite dense terminology and acronyms (e.g., CRISPR-Cas9, NHEJ, HDR, PAM, CAR-T, TCR, ALL, CML)<br>• Output is a valid JSON array of strings<br>• Identifies distinct subject areas rather than listing individual acronyms or jargon terms</td>
+                <td class="output"><pre>```json
+[
+  "CRISPR-Cas9 gene editing",
+  "Monogenic disorders",
+  "Non-homologous end joining (NHEJ)",
+  "Homology-directed repair (HDR)",
+  "Off-target effects",
+  "High-fidelity Cas9 variants",
+  "PAM sequences",
+  "Multiplexed CRISPR arrays",
+  "Polygenic traits",
+  "Base editing technologies",
+  "CAR-T cell engineering",
+  "TCR gene modification",
+  "Acute lymphoblastic leukemia (ALL)",
+  "Chronic myeloid leukemia (CML)",
+  "Genomic stability",
+  "Genotoxicity"
+]
+```</pre></td>
+                <td class="score-col"><span class="score score-high">9</span></td>
+                <td class="reasoning">The solution successfully meets all mandatory requirements: it provides a valid JSON array, includes all major topics from the dense passage (spanning techniques, mechanisms, applications, and clinical contexts), uses specific and descriptive language, contains no duplicates, includes only relevant academic topics, excludes transitional phrases, and maintains appropriate conciseness. The extraction demonstrates strong comprehension of the specialized terminology and hierarchical relationship between topics. The minor terminology deviation ('modification' vs. 'engineering') and potential undercapture of sgRNA specificity are non-critical issues that do not violate mandatory requirements. The solution exemplifies competent topic extraction from highly technical biomedical literature.</td>
+            </tr>
+        
+            <tr>
+                <td>Testing with passage where topics are implicitly discussed through examples and case studies rather than explicitly stated as topic names</td>
+                <td class="prompt-inputs"><strong>content:</strong> Recent studies have examined organizational behavior through several illustrative cases. The automotive industry's shift toward electric vehicles demonstrates supply chain innovation, as seen in Tesla's vertical integration strategy and BMW's partnership models with battery manufacturers. Meanwhile, the pharmaceutical sector illustrates different adaptive mechanisms: Pfizer's rapid vaccine development during the pandemic exemplified agile project management, while Johnson & Johnson's acquisition of Actelion showcased strategic portfolio expansion. In retail, Amazon's implementation of cashier-less checkout systems and Walmart's omnichannel logistics network reveal contrasting approaches to technological disruption. These examples collectively underscore how organizations navigate market competition, technological change, and stakeholder management in contemporary business environments.</td>
+                <td class="criteria">• Identifies implicit topics revealed through examples (supply chain innovation, agile project management, strategic portfolio expansion, technological disruption, market competition, stakeholder management)<br>• Extracts topics without relying on explicit topic names or headers<br>• Returns results as a JSON array of strings</td>
+                <td class="output"><pre>```json
+[
+  "Electric Vehicle Industry Transition",
+  "Supply Chain Innovation",
+  "Vertical Integration Strategy",
+  "Strategic Partnerships",
+  "Agile Project Management",
+  "Strategic Portfolio Expansion",
+  "Technological Disruption",
+  "Omnichannel Logistics",
+  "Market Competition",
+  "Stakeholder Management"
+]
+```</pre></td>
+                <td class="score-col"><span class="score score-high">8</span></td>
+                <td class="reasoning">The solution meets all mandatory requirements: it provides valid JSON format with string elements, includes major topics from the passage, uses specific and descriptive language, contains no duplicates, and maintains academic relevance. Topics are appropriately concise and free of transitional words. However, the solution misses a few implicit topics that are clearly supported by the examples (particularly around acquisition/M&A strategy and pandemic-driven innovation). While the solution successfully identifies the core topics and demonstrates good understanding of implicit topic extraction, the omission of 1-2 derivable topics from explicit examples represents a minor deficiency in comprehensiveness.</td>
+            </tr>
+        
+            </tbody>
+        </table>
+    </body>
+    </html>
+    

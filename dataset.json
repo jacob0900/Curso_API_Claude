@@ -1,0 +1,50 @@
+[
+  {
+    "prompt_inputs": {
+      "content": "Recent advances in brain-computer interfaces (BCIs) have demonstrated remarkable potential for treating neurological disorders through the integration of machine learning algorithms and neural signal processing. Researchers utilizing implanted microelectrode arrays have successfully decoded motor intent from primary motor cortex recordings, enabling paralyzed patients to control robotic limbs with high precision. Simultaneously, non-invasive EEG-based systems combined with deep neural networks have shown promise in real-time attention monitoring and cognitive load assessment. These technological developments rely on principles of neuroplasticity\u2014the brain's capacity to reorganize neural pathways\u2014which psychological studies have shown is enhanced through intensive task training and sensorimotor feedback loops. The convergence of neuroscience, computational neuroscience, and biomedical engineering has opened new therapeutic avenues while raising important questions about cognitive enhancement, privacy concerns in neural data collection, and the psychological implications of human-machine neural integration."
+    },
+    "solution_criteria": [
+      "Extracts all major topics spanning psychology, neuroscience, and technology domains",
+      "Returns output as a valid JSON array of strings",
+      "Captures both specific technical terms and broader conceptual areas mentioned in the passage"
+    ],
+    "task_description": "Extract topics out of a passage of text from a scholarly article into a JSON array of strings",
+    "scenario": "Testing with interdisciplinary passage containing mixed topics from psychology, neuroscience, and technology to verify accurate topic extraction across fields"
+  },
+  {
+    "prompt_inputs": {
+      "content": "The study of neuroplasticity has fundamentally transformed our understanding of brain development and cognitive rehabilitation. Synaptic pruning, the process by which the brain eliminates redundant neural connections, occurs simultaneously with synaptogenesis, or the formation of new synaptic connections. These complementary mechanisms are particularly active during critical developmental periods in childhood and adolescence, though evidence suggests the adult brain maintains considerable capacity for structural reorganization. Furthermore, experience-dependent plasticity\u2014wherein learning and environmental enrichment physically reshape neural architecture through dendritic growth and myelination\u2014demonstrates that cognitive development is not solely determined by genetic programming but is deeply influenced by behavioral engagement and environmental stimulation throughout the lifespan."
+    },
+    "solution_criteria": [
+      "Extracts topics at appropriate levels of granularity (e.g., 'neuroplasticity' as overarching concept alongside 'synaptic pruning' and 'synaptogenesis' as specific mechanisms)",
+      "Captures both general concepts (brain development, cognitive rehabilitation) and specific biological processes (dendritic growth, myelination)",
+      "Returned as a valid JSON array of strings"
+    ],
+    "task_description": "Extract topics out of a passage of text from a scholarly article into a JSON array of strings",
+    "scenario": "Testing with passage containing overlapping or nested concepts where topics could be interpreted at different levels of granularity"
+  },
+  {
+    "prompt_inputs": {
+      "content": "Recent advances in CRISPR-Cas9 gene editing have demonstrated significant efficacy in treating monogenic disorders through non-homologous end joining (NHEJ) pathways and homology-directed repair (HDR) mechanisms. The off-target effects previously associated with sgRNA specificity have been substantially mitigated through the development of high-fidelity Cas9 variants and optimized PAM sequences. Furthermore, multiplexed CRISPR arrays enable simultaneous targeting of polygenic traits, while emerging base editing technologies circumvent the need for double-strand breaks. Clinical trials utilizing ex vivo CAR-T cell engineering with CRISPR-modified TCR genes have shown promising immunotoxicity profiles in acute lymphoblastic leukemia (ALL) and chronic myeloid leukemia (CML) cohorts, though long-term follow-up data regarding genomic stability and genotoxicity remain limited."
+    },
+    "solution_criteria": [
+      "Extracts all major topics despite dense terminology and acronyms (e.g., CRISPR-Cas9, NHEJ, HDR, PAM, CAR-T, TCR, ALL, CML)",
+      "Output is a valid JSON array of strings",
+      "Identifies distinct subject areas rather than listing individual acronyms or jargon terms"
+    ],
+    "task_description": "Extract topics out of a passage of text from a scholarly article into a JSON array of strings",
+    "scenario": "Testing with dense academic text containing domain-specific jargon and acronyms to ensure topics are extracted despite terminology complexity"
+  },
+  {
+    "prompt_inputs": {
+      "content": "Recent studies have examined organizational behavior through several illustrative cases. The automotive industry's shift toward electric vehicles demonstrates supply chain innovation, as seen in Tesla's vertical integration strategy and BMW's partnership models with battery manufacturers. Meanwhile, the pharmaceutical sector illustrates different adaptive mechanisms: Pfizer's rapid vaccine development during the pandemic exemplified agile project management, while Johnson & Johnson's acquisition of Actelion showcased strategic portfolio expansion. In retail, Amazon's implementation of cashier-less checkout systems and Walmart's omnichannel logistics network reveal contrasting approaches to technological disruption. These examples collectively underscore how organizations navigate market competition, technological change, and stakeholder management in contemporary business environments."
+    },
+    "solution_criteria": [
+      "Identifies implicit topics revealed through examples (supply chain innovation, agile project management, strategic portfolio expansion, technological disruption, market competition, stakeholder management)",
+      "Extracts topics without relying on explicit topic names or headers",
+      "Returns results as a JSON array of strings"
+    ],
+    "task_description": "Extract topics out of a passage of text from a scholarly article into a JSON array of strings",
+    "scenario": "Testing with passage where topics are implicitly discussed through examples and case studies rather than explicitly stated as topic names"
+  }
+]
