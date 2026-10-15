@@ -23,7 +23,9 @@ There is no lint or type-check setup.
 
 - `main.py` is the server entry point. It creates `mcp = FastMCP("docs")` and registers tools by calling `mcp.tool()(fn)` on plain functions it imports from `tools/`. A function only becomes a tool once it is registered here.
 - `tools/` holds plain Python functions with no MCP imports, one module per area (`math.py`, `document.py`). Because they're plain functions, tests import and call them directly, with no server running.
-- `tools/document.py`: `binary_document_to_markdown(binary_data, file_type)` wraps `markitdown`. It passes the bytes in through `BytesIO`, with `StreamInfo(extension=file_type)` telling it the format (`"docx"`, `"pdf"`). This function is **not yet registered** in `main.py`, and it doesn't yet follow the tool conventions below. Only `add` is registered right now.
+- `tools/document.py`: `binary_document_to_markdown(binary_data, file_type)` wraps `markitdown`. It decodes the **base64** `binary_data` and passes the bytes in through `BytesIO`, with `StreamInfo(extension=file_type)` telling it the format (`"docx"`, `"pdf"`). Tool arguments arrive as JSON, which can't carry raw bytes, so any tool that takes binary content should take it as a base64 `str`, never as `bytes`.
+- `document_path_to_markdown(file_path)` reads a `.pdf`/`.docx` file from the server's disk and detects the format from the extension, ignoring case. It can read any such file the server process can access. Both document tools share the private `_bytes_to_markdown` helper for the actual conversion.
+- Registered tools: `add`, `binary_document_to_markdown`, `document_path_to_markdown`. `tests/test_document.py` also calls a tool through `mcp.call_tool(...)` to test the full JSON-argument path.
 - `tests/fixtures/` contains the sample files the tests use, `mcp_docs.docx` and `mcp_docs.pdf`.
 
 ## Conventions
